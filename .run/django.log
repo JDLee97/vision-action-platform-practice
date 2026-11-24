@@ -1,0 +1,46 @@
+Watching for file changes with StatReloader
+[24/Nov/2026 16:45:23] "GET /accounts/login/ HTTP/1.1" 200 1731
+[24/Nov/2026 16:45:40] "POST /api/v1/analyses/ HTTP/1.1" 202 616
+[24/Nov/2026 16:45:40] "GET /api/v1/analyses/1/status/ HTTP/1.1" 200 211
+[24/Nov/2026 16:45:42] "GET /api/v1/analyses/1/status/ HTTP/1.1" 200 221
+[24/Nov/2026 16:45:43] "GET /api/v1/analyses/1/status/ HTTP/1.1" 200 221
+[24/Nov/2026 16:45:45] "GET /api/v1/analyses/1/status/ HTTP/1.1" 200 656
+[24/Nov/2026 16:45:49] "GET /accounts/login/ HTTP/1.1" 200 1731
+[24/Nov/2026 16:45:49] "GET /static/css/app.css HTTP/1.1" 200 10056
+Not Found: /favicon.ico
+[24/Nov/2026 16:45:50] "GET /favicon.ico HTTP/1.1" 404 3735
+[24/Nov/2026 16:45:54] "POST /accounts/login/ HTTP/1.1" 302 0
+[24/Nov/2026 16:45:54] "GET /analyses/ HTTP/1.1" 200 6653
+[24/Nov/2026 16:45:54] "GET /static/js/analyses.js HTTP/1.1" 200 14167
+[24/Nov/2026 16:45:54] "GET /api/v1/analyses/ HTTP/1.1" 200 1143
+Not Found: /favicon.ico
+[24/Nov/2026 16:45:54] "GET /favicon.ico HTTP/1.1" 404 3735
+[24/Nov/2026 16:46:05] "GET /analyses/ HTTP/1.1" 200 6653
+[24/Nov/2026 16:46:05] "GET /api/v1/analyses/ HTTP/1.1" 200 1143
+Not Found: /favicon.ico
+[24/Nov/2026 16:46:05] "GET /favicon.ico HTTP/1.1" 404 3735
+[24/Nov/2026 16:46:08] "GET /analyses/cameras/demo/snapshot/?t=1795506368887 HTTP/1.1" 200 37796
+[24/Nov/2026 16:46:10] "GET /analyses/cameras/demo/snapshot/?t=1795506370119 HTTP/1.1" 200 37508
+[24/Nov/2026 16:46:11] "GET /analyses/cameras/demo/snapshot/?t=1795506371363 HTTP/1.1" 200 37440
+[24/Nov/2026 16:46:12] "GET /analyses/cameras/demo/snapshot/?t=1795506372585 HTTP/1.1" 200 37748
+[24/Nov/2026 16:46:13] "GET /analyses/cameras/demo/snapshot/?t=1795506373818 HTTP/1.1" 200 37511
+[24/Nov/2026 16:46:15] "GET /analyses/cameras/demo/snapshot/?t=1795506375049 HTTP/1.1" 200 37685
+[24/Nov/2026 16:46:16] "GET /analyses/cameras/demo/snapshot/?t=1795506376283 HTTP/1.1" 200 37272
+[24/Nov/2026 16:46:17] "GET /analyses/cameras/demo/snapshot/?t=1795506377516 HTTP/1.1" 200 37546
+[24/Nov/2026 16:46:18] "GET /analyses/cameras/demo/snapshot/?t=1795506378735 HTTP/1.1" 200 37697
+[24/Nov/2026 16:46:19] "GET /analyses/cameras/demo/snapshot/?t=1795506379964 HTTP/1.1" 200 37593
+[24/Nov/2026 16:46:21] "GET /analyses/cameras/demo/snapshot/?t=1795506381197 HTTP/1.1" 200 37146
+[24/Nov/2026 16:46:22] "GET /analyses/cameras/demo/snapshot/?t=1795506382412 HTTP/1.1" 200 37518
+[24/Nov/2026 16:46:22] "POST /api/v1/analyses/ HTTP/1.1" 202 568
+[24/Nov/2026 16:46:23] "GET /api/v1/analyses/ HTTP/1.1" 200 1712
+[24/Nov/2026 16:46:23] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 211
+[24/Nov/2026 16:46:24] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 226
+[24/Nov/2026 16:46:26] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 226
+[24/Nov/2026 16:46:27] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 226
+[24/Nov/2026 16:46:29] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 226
+[24/Nov/2026 16:46:30] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 226
+[24/Nov/2026 16:46:32] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 221
+[24/Nov/2026 16:46:33] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 221
+[24/Nov/2026 16:46:35] "GET /api/v1/analyses/2/status/ HTTP/1.1" 200 656
+[24/Nov/2026 16:46:35] "GET /media/results/20261124/job2.jpg HTTP/1.1" 200 36601
+[24/Nov/2026 16:46:35] "GET /api/v1/analyses/ HTTP/1.1" 200 2246
