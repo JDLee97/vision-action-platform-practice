@@ -1,0 +1,18 @@
+# FastAPI AI 추론 서버 의존성
+# 6일차 모델을 학습한 subject10_pose_action 가상환경과 버전을 맞춘다.
+# (Python 3.12 / scikit-learn 1.9.1 / joblib 1.6.0 / numpy 2.5.4 / ultralytics 8.4.203)
+# torch는 Dockerfile에서 CPU 전용 휠을 먼저 설치한다. 로컬 GPU 환경에서는 기존 torch를 그대로 사용한다.
+
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+requests>=2.32
+
+scikit-learn==1.9.1
+joblib==1.6.0
+numpy==2.5.4
+pandas==3.1.1
+
+ultralytics==8.4.203
+opencv-python==5.0.0.93
+lap>=0.5.12

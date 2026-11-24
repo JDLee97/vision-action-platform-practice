@@ -1,0 +1,44 @@
+{% load static %}<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Vision AI 동작 분석{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{% url 'analyses:index' %}">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zm-6.8 9.3V16c0 1.7 3 3.5 6.8 3.5s6.8-1.8 6.8-3.5v-3.7L12 16l-6.8-3.7z"/></svg>
+      Vision AI</a>
+    <span class="divider"></span>
+    <nav>
+      {% if user.is_authenticated %}
+        <a href="{% url 'analyses:index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">동작 분석</a>
+        {% if user.is_staff %}
+          <a href="{% url 'analyses:dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">관리자 대시보드</a>
+          <a href="{% url 'admin:index' %}">Django Admin ↗</a>
+        {% endif %}
+      {% endif %}
+    </nav>
+    <div class="user">
+      {% if user.is_authenticated %}
+        <span>{{ user.username }}{% if user.is_staff %} (관리자){% endif %}</span>
+        <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="link-button" type="submit">로그아웃</button></form>
+      {% else %}
+        <a class="link-button" href="{% url 'login' %}">로그인</a>
+        <a class="link-button" href="{% url 'signup' %}">회원가입</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <main class="container">
+    {% if messages %}<ul class="messages">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

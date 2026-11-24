@@ -1,0 +1,4 @@
+# T05 비동기: 분석 요청 직후 응답 (Docker Compose, 2026-11-24 16:54:31)
+응답 내용: id= 10 status= PENDING stage= queued
+HTTP 202 / 응답까지 걸린 시간 0.140463초
+→ AI 분석(수 초)을 기다리지 않고 작업 ID를 먼저 받음

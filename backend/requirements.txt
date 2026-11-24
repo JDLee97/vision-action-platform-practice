@@ -1,0 +1,10 @@
+# Django·DRF·Celery Worker 공통 의존성 (AI 라이브러리는 ai_service에만 설치)
+Django==5.2.19
+djangorestframework==3.18.3
+celery[redis]==5.7.0
+redis==8.2.0
+psycopg[binary]==3.3.9
+python-dotenv==1.2.4
+requests==2.34.2
+# IP Webcam 영상 수집(camera_capture.py)
+opencv-python-headless==5.1.0.95

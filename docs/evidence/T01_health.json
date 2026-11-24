@@ -1,0 +1,28 @@
+{
+    "status": "ok",
+    "model_loaded": true,
+    "classes": [
+        "bend_return",
+        "drink_return",
+        "leg_raise_lower",
+        "sit_stand",
+        "walk_turn_walk",
+        "wave"
+    ],
+    "actions": {
+        "A001": "bend_return",
+        "A002": "leg_raise_lower",
+        "A003": "walk_turn_walk",
+        "A004": "drink_return",
+        "A005": "sit_stand",
+        "A006": "wave"
+    },
+    "feature_count": 1140,
+    "sequence_steps": 30,
+    "min_valid_frames": 10,
+    "confidence_threshold": 0.55,
+    "device": "cpu",
+    "training_subjects": [
+        "S01"
+    ]
+}

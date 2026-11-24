@@ -1,0 +1,7 @@
+# T07 CRUD 권한: student02가 student01의 작업 #1에 접근 (2026-11-24 16:54:57)
+GET    /api/v1/analyses/1/  → HTTP 404 {"detail":"No AnalysisJob matches the given query."}
+PATCH  /api/v1/analyses/1/  → HTTP 404 {"detail":"No AnalysisJob matches the given query."}
+DELETE /api/v1/analyses/1/  → HTTP 404 {"detail":"No AnalysisJob matches the given query."}
+GET    /api/v1/analyses/ (student02 목록) → count = 0
+GET    /api/v1/analyses/1/ (student01 본인) → HTTP 200
+GET    /api/v1/analyses/ (비로그인) → HTTP 403 {"detail":"자격 인증 데이터가 제공되지 않았습니다."}

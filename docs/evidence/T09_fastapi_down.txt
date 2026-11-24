@@ -1,0 +1,5 @@
+﻿# T09 FastAPI 중단 시 실패 처리 (2026-11-24 16:56:14)
+> docker compose stop fastapi
+요청: POST /api/v1/analyses/ (samples/a10_s07_e02.mp4) → 작업 id=12 PENDING
+결과: id= 12 status= FAILURE | error_message= AI 서버(FastAPI)에 연결할 수 없습니다. 서버가 실행 중인지 확인하세요. | predictions= []
+> docker compose start fastapi

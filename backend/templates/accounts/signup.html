@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}회원가입 · Vision AI{% endblock %}
+{% block content %}
+<div class="card auth-card">
+  <h1 class="card-title">회원가입</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+      <div class="field">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {{ field.errors }}
+        {% if field.help_text %}<div class="help">{{ field.help_text|safe }}</div>{% endif %}
+      </div>
+    {% endfor %}
+    <button class="btn-primary" type="submit" style="width:100%;justify-content:center">가입하고 시작하기</button>
+  </form>
+  <p class="page-sub" style="margin-top:16px">이미 계정이 있나요? <a href="{% url 'login' %}">로그인</a></p>
+</div>
+{% endblock %}

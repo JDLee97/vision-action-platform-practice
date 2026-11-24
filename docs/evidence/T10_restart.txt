@@ -1,0 +1,36 @@
+﻿# T10 컨테이너 재시작 후 영구 데이터 유지 (2026-11-24 16:55:13)
+## 재시작 전
+ status  | count 
+---------+-------
+ FAILURE |     2
+ SUCCESS |     8
+(2 rows)
+
+ predictions 
+-------------
+           9
+(1 row)
+
+> docker compose down   (컨테이너 삭제, 볼륨 유지)
+> docker compose up -d
+## 재시작 후
+ status  | count 
+---------+-------
+ FAILURE |     2
+ SUCCESS |     8
+(2 rows)
+
+ predictions 
+-------------
+           9
+(1 row)
+
+celery: Up 26 seconds
+django: Up 26 seconds
+fakecam: Up 25 seconds
+fastapi: Up 32 seconds (healthy)
+postgres: Up 32 seconds (healthy)
+redis: Up 32 seconds (healthy)
+## 재시작 후 새 분석 요청 (서비스 재연결 확인)
+요청: POST /api/v1/analyses/ (samples/S01_wave_train.mp4) → 작업 id=13 PENDING
+결과: id= 13 status= SUCCESS | error_message= - | predictions= [(1, 'wave', 0.6267)]

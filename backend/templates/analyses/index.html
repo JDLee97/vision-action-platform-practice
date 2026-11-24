@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Vision AI 동작 분석{% endblock %}
+{% block content %}
+<h1 class="page-title">Vision AI 동작 분석</h1>
+<p class="page-sub">수업에서 다룬 6개 동작(A001~A006) 중 하나를 수행한 영상을 분석합니다. 예측 결과는 정답 판정이 아니므로 신뢰도와 함께 확인하세요.</p>
+
+<div class="tabs" role="tablist">
+  <button class="tab active" type="button" data-mode="upload">영상 업로드</button>
+  <button class="tab" type="button" data-mode="ipwebcam">IP Webcam</button>
+</div>
+
+<div class="grid">
+  <!-- 왼쪽: 입력 -->
+  <section class="card">
+    <h2 class="card-title" id="input-title">영상 미리보기</h2>
+
+    <div class="preview" id="preview">
+      <div class="placeholder" id="preview-placeholder">분석할 MP4 영상을 선택하세요</div>
+      <video id="preview-video" controls muted hidden></video>
+      <img id="preview-image" alt="미리보기" hidden>
+      <span class="badge-overlay" id="preview-badge" hidden></span>
+    </div>
+
+    <!-- 업로드 입력 -->
+    <div id="upload-panel">
+      <label class="dropzone" id="dropzone">
+        <input type="file" id="video-file" accept="video/mp4,video/*" hidden>
+        <strong>파일 선택</strong> 또는 영상을 여기로 끌어다 놓기 (최대 {{ max_upload_mb }}MB)
+        <div id="file-name" style="margin-top:4px;color:#1c1f33"></div>
+      </label>
+    </div>
+
+    <!-- IP Webcam 입력 -->
+    <div id="ipwebcam-panel" hidden>
+      <div class="form-row" style="grid-template-columns:1fr auto;align-items:end">
+        <div>
+          <label for="camera-key">카메라 (관리자가 허용한 카메라만 표시)</label>
+          <select id="camera-key">
+            {% for cam in cameras %}<option value="{{ cam.key }}">{{ cam.name }}</option>{% empty %}<option value="">등록된 카메라가 없습니다 (.env의 IP_WEBCAM_CAMERAS)</option>{% endfor %}
+          </select>
+        </div>
+        <button class="btn" type="button" id="camera-refresh" style="padding:9px 14px">미리보기 연결</button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div>
+        <label for="expected-action">수행하려는 동작 (선택)</label>
+        <select id="expected-action">
+          <option value="">선택 안 함</option>
+          {% for value, label in action_choices %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label for="job-title">제목 (선택)</label>
+        <input type="text" id="job-title" maxlength="100" placeholder="예: 손 흔들기 1차 시도">
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button class="btn-primary" id="start-button" type="button">▶ AI 분석 시작</button>
+      <div class="meta" id="action-meta">영상 업로드 분석</div>
+    </div>
+  </section>
+
+  <!-- 오른쪽: 상태·결과 -->
+  <div class="stack">
+    <section class="card">
+      <h2 class="card-title">분석 상태 <span class="hint" id="job-label"></span></h2>
+      <div class="stepper" id="stepper">
+        <div class="step" data-stage="queued"><div class="dot">✓</div>대기</div>
+        <div class="step-arrow">→</div>
+        <div class="step" data-stage="collecting"><div class="dot">✓</div>영상 수집</div>
+        <div class="step-arrow">→</div>
+        <div class="step" data-stage="analyzing"><div class="dot">✓</div>AI 분석</div>
+        <div class="step-arrow">→</div>
+        <div class="step" data-stage="done"><div class="dot">✓</div><span id="done-label">완료</span></div>
+      </div>
+      <div class="status-text" id="status-text">분석을 시작하면 진행 상태가 표시됩니다.</div>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">분석 결과</h2>
+      <div class="result-table">
+        <table>
+          <thead><tr><th>Track ID</th><th>예측 동작</th><th>신뢰도</th></tr></thead>
+          <tbody id="result-body"></tbody>
+        </table>
+      </div>
+      <div class="result-empty" id="result-empty">아직 결과가 없습니다</div>
+      <div class="result-meta"><span id="result-message"></span><span id="result-time"></span></div>
+    </section>
+  </div>
+</div>
+
+<section class="card" style="margin-top:22px">
+  <h2 class="card-title">최근 분석 이력 <span class="hint">행을 누르면 결과를 다시 봅니다 · 새로고침해도 DB에 남아 있습니다</span></h2>
+  <div style="overflow-x:auto">
+    <table class="list-table">
+      <thead><tr><th>작업 ID</th><th>제목</th><th>입력 방식</th><th>수행하려는 동작</th><th>예측 결과</th><th>처리 시간</th><th>상태</th><th>생성 시간</th><th></th></tr></thead>
+      <tbody id="history-body"><tr><td colspan="9">불러오는 중…</td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<div class="notice">
+  이 모델은 S01 한 사람의 6개 Clip으로 학습한 Random Forest입니다(검증 정확도 0.50). 새 사람·새 환경에서는 틀릴 수 있으며,
+  신뢰도 55% 미만은 <span class="tag-uncertain">불확실</span>로 표시합니다. 학습하지 않은 동작도 6개 중 하나로 출력될 수 있습니다.
+</div>
+
+{{ capture_seconds|json_script:"capture-seconds" }}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.APP = {
+    apiBase: "{% url 'analyses:analysis-list' %}",
+    snapshotUrl: "{% url 'analyses:camera_snapshot' 'CAMERA_KEY' %}",
+    csrfToken: "{{ csrf_token }}",
+  };
+</script>
+<script src="{% static 'js/analyses.js' %}"></script>
+{% endblock %}

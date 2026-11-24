@@ -1,0 +1,29 @@
+# 비밀정보
+.env
+
+# 가상환경·캐시
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# 큰 모델 파일 (README의 "모델 준비" 절차로 복사)
+*.pt
+*.joblib
+
+# 실행 중 생성되는 파일
+backend/media/
+backend/staticfiles/
+db.sqlite3
+celerybeat-schedule
+.celery_broker/
+
+# 테스트용 영상
+samples/*.mp4
+*.mp4
+*.avi
+*.mov
+.env.local-test
+.run/
+.venv-tools/
