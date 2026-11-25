@@ -1,10 +1,28 @@
-# 비밀 정보
+# 비밀 정보 (실제 비밀키·DB 비밀번호·카메라 주소) — .env.example만 올린다
 .env
+.env.*
+!.env.example
 
-# 가상환경
+# 가상환경 (다른 PC에서는 requirements.txt로 다시 설치)
 .venv/
 .venv-tools/
 
 # 자동 생성물 (올려도 의미 없음)
 __pycache__/
 *.pyc
+.pytest_cache/
+
+# 로컬 테스트 중 생긴 파일 (Docker에서는 DB·업로드 파일이 볼륨에 저장됨)
+.run/
+.celery_broker/
+backend/db.sqlite3
+backend/media/
+backend/staticfiles/
+
+# 편집기·OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 모델(*.joblib, *.pt, *.json)과 samples/ 영상은 일부러 포함한다 (pull 후 바로 실행 가능하도록)
